@@ -1,8 +1,8 @@
 module Pjax
   extend ActiveSupport::Concern
-  
+
   included do
-    layout ->(c) { pjax_request? ? false : 'application' }
+    layout ->(c) { pjax_request? ? 'application-pjax' : 'application' }
   end
 
   def redirect_pjax_to(action, url = nil)
@@ -24,7 +24,7 @@ module Pjax
   
   private
 
-  def pjax_request?
+    def pjax_request?
       env['HTTP_X_PJAX'].present?
     end
 end
